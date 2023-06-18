@@ -1,0 +1,14 @@
+file_format: "1"
+id: the_wedge
+name: The Wedge
+type: shield
+url: https://github.com/antoniusnaumann/the-wedge
+requires: [seeed_xiao]
+exposes: []
+features:
+  - keys
+  # - display
+  # - underglow
+siblings:
+  - the_wedge_left
+  - the_wedge_right

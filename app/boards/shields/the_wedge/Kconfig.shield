@@ -1,0 +1,5 @@
+config SHIELD_WEDGE_LEFT
+    def_bool $(shields_list_contains,the_wedge_left)
+
+config SHIELD_WEDGE_RIGHT
+    def_bool $(shields_list_contains,the_wedge_right)

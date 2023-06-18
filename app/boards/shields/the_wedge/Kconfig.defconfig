@@ -1,0 +1,16 @@
+if SHIELD_WEDGE_LEFT
+
+config ZMK_KEYBOARD_NAME
+    default "The Wedge"
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+endif
+
+if SHIELD_WEDGE_LEFT || SHIELD_WEDGE_RIGHT
+
+config ZMK_SPLIT
+    default y
+
+endif 
