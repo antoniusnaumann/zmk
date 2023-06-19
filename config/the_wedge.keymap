@@ -2,11 +2,6 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-#define GUI(keycode) &hm_long LGUI keycode
-#define CTRL(keycode) &hm_long LCTRL keycode
-#define SHIFT(keycode) &hm_short LSHIFT keycode
-#define ALT(keycode) &hm LALT keycode
-
 / {
         
         behaviors {
@@ -47,7 +42,7 @@
 //             |     | ... | SPC | SYM |     | SYM | RET | BSP | ESC |
                         bindings = <
    &caps_word  &kp W      &kp F      &kp P         &kp B                                   &kp J     &kp L        &kp U      &kp Y      &caps_word  
-   &kp CTRL(A) &kp ALT(R) &kp GUI(S) &kp SHIFT(T)  &kp G        &kp LGUI        &kp LGUI   &kp M     &kp SHIFT(N) &kp GUI(E) &kp ALT(I) &kp CTRL(O)
+   &kp A	   &kp     R  &kp     S  &kp       T   &kp G        &kp LGUI        &kp LGUI   &kp M     &kp       N  &kp     E  &kp     I  &kp      O 
                &kp X      &kp C      &kp D         &kp V        &kp LGUI        &kp LGUI   &kp K     &kp H        &kp Z      &kp Q 
                           &kp LGUI   &kp TAB       &kp SPACE    &kp RET         &kp RET    &kp RET   &kp BSPC     &kp ESC
                         >;
