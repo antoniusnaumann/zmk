@@ -73,7 +73,7 @@
             >;
         };
 
-        layer_1 {
+        symbols {
             bindings = <
       &kp CARET        &kp HASH       &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH                         &kp PIPE  &kp GREATER_THAN    &kp LESS_THAN      &kp COLON   &kp PERCENT
 &kp EXCLAMATION  &kp UNDERSCORE   &kp LEFT_PARENTHESIS  &kp DOUBLE_QUOTES      &kp SLASH  &trans    &trans  &kp AMPERSAND    &kp APOSTROPHE   &kp LEFT_BRACE  &kp SEMICOLON  &kp QUESTION
@@ -82,7 +82,7 @@
             >;
         };
 
-        layer_2 {
+        num_block {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &tog 2
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
@@ -91,7 +91,7 @@
             >;
         };
 
-        layer_3 {
+        navigation {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
