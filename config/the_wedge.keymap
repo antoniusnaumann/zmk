@@ -1,51 +1,103 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
 
 / {
-        
-        behaviors {
-                hm_long: homerow_mods_long {
-                    compatible = "zmk,behavior-hold-tap";
-                    label = "homerow mods long";
-                    #binding-cells = <2>;
-                    tapping_term_ms = <400>;
-                    flavor = "tap-preferred";
-                    bindings = <&kp>, <&kp>;
-                };
-                hm: homerow_mods {
-                    compatible = "zmk,behavior-hold-tap";
-                    label = "homerow mods";
-                    #binding-cells = <2>;
-                    tapping_term_ms = <300>;
-                    flavor = "tap-preferred";
-                    bindings = <&kp>, <&kp>;
-                };
-                hm_short: homerow_mods_short {
-                    compatible = "zmk,behavior-hold-tap";
-                    label = "homerow mods short";
-                    #binding-cells = <2>;
-                    tapping_term_ms = <200>;
-                    flavor = "tap-preferred";
-                    bindings = <&kp>, <&kp>;
-                };
+    behaviors {
+        hm_long: homerow_mods_long {
+            compatible = "zmk,behavior-hold-tap";
+            label = "homerow mods long";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            bindings =
+                <&kp>,
+                <&kp>;
+
+            tapping-term-ms = <400>;
+            global-quick-tap;
+            quick-tap-ms = <100>;
+        };
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "homerow mods";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            bindings =
+                <&kp>,
+                <&kp>;
+
+            tapping-term-ms = <300>;
+            quick-tap-ms = <100>;
+            global-quick-tap;
+        };
+        hm_short: homerow_mods_short {
+            compatible = "zmk,behavior-hold-tap";
+            label = "homerow mods short";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            bindings =
+                <&kp>,
+                <&kp>;
+
+            tapping-term-ms = <200>;
+            quick-tap-ms = <100>;
+            global-quick-tap;
+        };
+        tl: to_layer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "Momentary Layer on hold, sticky on tap";
+            bindings =
+                <&mo>,
+                <&sl>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "balanced";
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            // -----------------------------------------------------------------------------------------
+            // | CPS |  W  |  F  |  P  |  B  |                 |  J  |  L  |  U  |  Y  |     |
+            // |  A  |  R  |  S  |  T  |  G  |     |     |     |  M  |  N  |  E  |  I  |  O  |  
+            //       |  X  |  C  |  D  |  V  |     |     |     |  K  |  H  |  Z  |  Q  |   
+            //             | CPY | TAB | SPC | SYM |     | SYM | RET | BSP | ESC |
+
+            bindings = <
+             &caps_word           &kp W  &hm_long LA(LC(LS(LEFT_GUI))) F  &hm_long LS(LA(LEFT_CONTROL)) P      &kp B                          &kp J  &hm_long RS(RA(RIGHT_CONTROL)) L  &hm_long RS(RA(RC(RIGHT_GUI))) U            &kp Y                    &tog 2
+&hm_long LEFT_CONTROL A  &hm LEFT_ALT R          &hm_long LEFT_COMMAND S           &hm_short LEFT_SHIFT T      &kp G  &kp LGUI    &kp LGUI    &kp M           &hm_short RIGHT_SHIFT N          &hm_long RIGHT_COMMAND E  &hm RIGHT_ALT I  &hm_long RIGHT_CONTROL O
+                                  &kp X                            &kp C                            &kp D      &kp V  &kp LGUI    &kp LGUI    &kp K                             &kp H                             &kp Z            &kp Q
+                                                                &kp LGUI                          &kp TAB  &kp SPACE   &tl 1 1     &tl 1 1  &kp RET                          &kp BSPC                           &kp ESC
+            >;
         };
 
-        keymap {
-                compatible = "zmk,keymap";
-
-                default_layer {
-// -----------------------------------------------------------------------------------------
-// | CPS |  W  |  F  |  P  |  B  |                 |  J  |  L  |  U  |  Y  |     |
-// |  A  |  R  |  S  |  T  |  G  |     |     |     |  M  |  N  |  E  |  I  |  O  |  
-//       |  X  |  C  |  D  |  V  |     |     |     |  K  |  H  |  Z  |  Q  |   
-//             | CPY | TAB | SPC | SYM |     | SYM | RET | BSP | ESC |
-                        bindings = <
-   &caps_word  &kp W      &kp F      &kp P         &kp B                                   &kp J     &kp L        &kp U      &kp Y      &caps_word  
-   &kp A	   &kp R      &kp S      &kp T         &kp G        &kp LGUI        &kp LGUI   &kp M     &kp N        &kp E      &kp I      &kp O 
-               &kp X      &kp C      &kp D         &kp V        &kp LGUI        &kp LGUI   &kp K     &kp H        &kp Z      &kp Q 
-                          &kp LGUI   &kp TAB       &kp SPACE    &kp RET         &kp RET    &kp RET   &kp BSPC     &kp ESC
-                        >;
-                };
+        layer_1 {
+            bindings = <
+      &kp CARET        &kp HASH       &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH                         &kp PIPE  &kp GREATER_THAN    &kp LESS_THAN      &kp COLON   &kp PERCENT
+&kp EXCLAMATION  &kp UNDERSCORE   &kp LEFT_PARENTHESIS  &kp DOUBLE_QUOTES      &kp SLASH  &trans    &trans  &kp AMPERSAND    &kp APOSTROPHE   &kp LEFT_BRACE  &kp SEMICOLON  &kp QUESTION
+                      &kp MINUS  &kp RIGHT_PARENTHESIS       &kp ASTERISK     &kp DOLLAR  &trans    &trans         &kp AT         &kp EQUAL  &kp RIGHT_BRACE       &kp PLUS
+                                                &trans          &kp GRAVE      &kp COMMA   &none     &none        &kp DOT         &kp TILDE           &tog 1
+            >;
         };
+
+        layer_2 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &tog 2
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans    &trans  &trans  &trans  &tog 2
+            >;
+        };
+
+        layer_3 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans    &trans  &trans  &trans  &tog 3
+            >;
+        };
+    };
 };
