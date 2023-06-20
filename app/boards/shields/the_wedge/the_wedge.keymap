@@ -1,0 +1,119 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+
+/ {
+    behaviors {
+        hll: hold_long {
+            compatible = "zmk,behavior-hold-tap";
+            label = "Hold-Tap Long";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            bindings =
+                <&kp>,
+                <&kp>;
+
+            tapping-term-ms = <400>;
+            global-quick-tap;
+            quick-tap-ms = <100>;
+        };
+        hl: hold {
+            compatible = "zmk,behavior-hold-tap";
+            label = "Hold-Tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            bindings =
+                <&kp>,
+                <&kp>;
+
+            tapping-term-ms = <300>;
+            quick-tap-ms = <100>;
+            global-quick-tap;
+        };
+        hls: hold_short {
+            compatible = "zmk,behavior-hold-tap";
+            label = "Hold-Tap Short";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            bindings =
+                <&kp>,
+                <&kp>;
+
+            tapping-term-ms = <200>;
+            quick-tap-ms = <100>;
+            global-quick-tap;
+        };
+        tl: to_layer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "Momentary Layer on hold, sticky on tap";
+            bindings =
+                <&mo>,
+                <&sl>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "balanced";
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        reset_right {
+            bindings = <&bootloader>;
+            key-positions = <37 9>;
+            layers = <0 2>;
+        };
+
+        reset_left {
+            bindings = <&bootloader>;
+            key-positions = <0 34>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            // -----------------------------------------------------------------------------------------
+            // | CPS |  W  |  F  |  P  |  B  |                 |  J  |  L  |  U  |  Y  |     |
+            // |  A  |  R  |  S  |  T  |  G  |     |     |     |  M  |  N  |  E  |  I  |  O  |  
+            //       |  X  |  C  |  D  |  V  |     |     |     |  K  |  H  |  Z  |  Q  |   
+            //             | CPY | TAB | SPC | SYM |     | SYM | RET | BSP | ESC |
+
+            bindings = <
+  &caps_word           &kp W  &hll LS(LA(LC(LCMD))) F  &hll LS(LA(LCTRL)) P        &kp B                              &kp J  &hll RS(RA(RCTRL)) L  &hll RS(RA(RC(RCMD))) U       &kp Y        &tog 2
+&hll LCTRL A  &hl LEFT_ALT R              &hll LCMD S         &hls LSHIFT T        &kp G  &kp LGUI    &kp LGUI        &kp M         &hls RSHIFT N              &hll RCMD E  &hl RALT I  &hll RCTRL O
+                       &kp X                    &kp C                 &kp D        &kp V  &kp LGUI    &kp LGUI        &kp K                 &kp H                    &kp Z       &kp Q
+                                           &kp DELETE               &kp TAB  &lt 3 SPACE   &tl 1 1     &tl 1 1  &lt 2 ENTER              &kp BSPC                  &kp ESC
+            >;
+        };
+
+        symbols {
+            bindings = <
+      &kp CARET        &kp HASH       &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH                         &kp PIPE  &kp GREATER_THAN    &kp LESS_THAN      &kp COLON   &kp PERCENT
+&kp EXCLAMATION  &kp UNDERSCORE   &kp LEFT_PARENTHESIS  &kp DOUBLE_QUOTES      &kp SLASH  &trans    &trans  &kp AMPERSAND    &kp APOSTROPHE   &kp LEFT_BRACE  &kp SEMICOLON  &kp QUESTION
+                      &kp MINUS  &kp RIGHT_PARENTHESIS       &kp ASTERISK     &kp DOLLAR  &trans    &trans         &kp AT         &kp EQUAL  &kp RIGHT_BRACE       &kp PLUS
+                                                &trans          &kp GRAVE      &kp COMMA   &none     &none        &kp DOT         &kp TILDE           &tog 1
+            >;
+        };
+
+        num_block {
+            bindings = <
+&kp KP_MULTIPLY  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9      &kp KP_PLUS                    &none            &none          &none          &none     &tog 2
+      &kp KP_N0  &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6       &kp KP_DOT  &none    &none  &kp ESC  &kp RIGHT_SHIFT  &kp RIGHT_GUI  &kp RIGHT_ALT  &kp RCTRL
+                 &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_SUBTRACT  &none    &none    &none            &none          &none          &none
+                                    &kp KP_DIVIDE     &kp KP_COMMA     &kp KP_EQUAL  &none    &none    &none            &none         &tog 2
+            >;
+        };
+
+        navigation {
+            bindings = <
+    &none     &kp LG(A)  &kp LG(Z)  &kp LG(LS(Z))  &kp LG(Y)                                 &kp INS        &kp HOME   &kp PAGE_DOWN   &kp PAGE_UP    &kp END
+&kp LCTRL  &kp LEFT_ALT   &kp LCMD     &kp LSHIFT    &kp ESC  &bt BT_NXT    &kp C_VOLUME_UP  &kp ESC  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT
+              &kp LG(X)  &kp LG(C)      &kp LG(D)  &kp LG(V)  &bt BT_PRV       &kp C_VOL_DN    &none           &none           &none         &none
+                            &trans         &trans     &trans  &bt BT_CLR         &kp C_MUTE   &trans          &trans          &tog 3
+            >;
+        };
+    };
+};
