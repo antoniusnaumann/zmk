@@ -8,7 +8,7 @@ exposes: []
 features:
   - keys
   # - display
-  # - underglow
+  - underglow
 siblings:
   - the_wedge_left
   - the_wedge_right
